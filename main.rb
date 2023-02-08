@@ -13,6 +13,8 @@ def main
     new_contact
   elsif user_input.to_i == 3
     display_contacts
+  elsif user_input.to_i == 4
+    delete_contact
   else
     puts "Invalid option"
     main 

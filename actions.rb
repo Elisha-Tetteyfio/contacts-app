@@ -32,4 +32,14 @@ module Actions
     data = get_contacts
     data.each_with_index {|d, i| puts("#{i}. Name: #{d["f_name"]} #{d["l_name"]} #{" "*5} Number: #{d["number"]}")}
   end
+
+  def delete_contact
+    list = display_contacts
+    user_input = gets.chomp.to_i
+    list.delete_at(user_input)
+    
+    File.open('contacts.json', 'w+') do |file|
+      file.write(JSON.dump(list))
+    end
+  end
 end
