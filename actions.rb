@@ -42,4 +42,23 @@ module Actions
       file.write(JSON.dump(list))
     end
   end
+
+  def edit_contact
+    list = display_contacts
+    user_input = gets.chomp.to_i
+    
+    f_name, l_name, number = form(list[user_input]["f_name"], list[user_input]["l_name"], list[user_input]["number"])
+
+    updated_obj = {
+      f_name: f_name,
+      l_name: l_name,
+      number: number
+    }
+
+    list[user_input] = updated_obj
+
+    File.open('contacts.json', 'w+') do |file|
+      file.write(JSON.dump(list))
+    end
+  end
 end
