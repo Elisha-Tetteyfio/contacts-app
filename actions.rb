@@ -27,4 +27,9 @@ module Actions
       file.write(JSON.dump(data))
     end
   end
+
+  def display_contacts
+    data = get_contacts
+    data.each_with_index {|d, i| puts("#{i}. Name: #{d["f_name"]} #{d["l_name"]} #{" "*5} Number: #{d["number"]}")}
+  end
 end
