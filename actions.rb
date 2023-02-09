@@ -36,6 +36,14 @@ module Actions
     return f_name1, l_name1, number1
   end
 
+  def confirmation(f_name, l_name)
+    puts "Are you sure you want to delete contact #{f_name} #{l_name}?\n"
+    puts "1 - Yes"
+    puts "2 - Cancel"
+    puts "00 - Back to main menu"
+    opt = gets.chomp
+  end
+
   def new_contact
     f_name, l_name, number = form
     data = get_contacts
@@ -68,7 +76,19 @@ module Actions
   def delete_contact
     list = display_contacts
     user_input = gets.chomp.to_i
-    list.delete_at(user_input)
+    opt = confirmation(list[user_input]["f_name"], list[user_input]["l_name"])
+
+    while true
+      if opt == "1"
+        list.delete_at(user_input)
+        break
+      elsif opt == "2" || opt == "00"
+        break
+      else
+        puts "Invalid option"
+        opt = confirmation(list[user_input]["f_name"], list[user_input]["l_name"])
+      end
+    end
     
     save(list)
   end
