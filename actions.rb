@@ -17,16 +17,6 @@ module Actions
     end
   end
 
-  def summary(f_name, l_name, number)
-    puts "First name: #{f_name}\n"
-    puts "Last name: #{l_name}\n"
-    puts "Contact number: #{number}\n"
-    puts "1 - Proceed to save\n"
-    puts "2 - Edit\n"
-    puts "00 - Back to menu\n"
-    user_input = gets.chomp
-  end
-
   def edit_contact(f_name, l_name, number)
     f_name1, l_name1, number1 = form(f_name, l_name, number)
     f_name1 = f_name if f_name1 == ""
@@ -36,15 +26,10 @@ module Actions
     return f_name1, l_name1, number1
   end
 
-  def confirmation(f_name, l_name)
-    puts "Are you sure you want to delete contact #{f_name} #{l_name}?\n"
-    puts "1 - Yes"
-    puts "2 - Cancel"
-    puts "00 - Back to main menu"
-    opt = gets.chomp
-  end
-
   def new_contact
+    puts "#{" "*5} Add contact"
+    puts "#{" "*5}--------------"
+
     f_name, l_name, number = form
     data = get_contacts
     opt = summary(f_name, l_name, number)
@@ -70,10 +55,12 @@ module Actions
 
   def display_contacts
     data = get_contacts
+    puts "\n"
     data.each_with_index {|d, i| puts("#{i}. Name: #{d["f_name"]} #{d["l_name"]} #{" "*5} Number: #{d["number"]}")}
   end
 
   def delete_contact
+    puts "\nSelect a contact to delete:"
     list = display_contacts
     user_input = gets.chomp.to_i
     opt = confirmation(list[user_input]["f_name"], list[user_input]["l_name"])
@@ -94,6 +81,7 @@ module Actions
   end
 
   def edit_contacts
+    puts "\nSelect a contact to edit:"
     list = display_contacts
     user_input = gets.chomp.to_i
 

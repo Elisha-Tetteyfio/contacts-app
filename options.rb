@@ -19,4 +19,23 @@ module Options
     number = gets.chomp
     return f_name, l_name, number
   end
+
+  def summary(f_name, l_name, number)
+    puts "\n#{" "*4}First name: #{f_name}\n"
+    puts "#{" "*4}Last name: #{l_name}\n"
+    puts "#{" "*4}Contact number: #{number}\n\n"
+    puts "#{" "*4}1 - Proceed to save\n"
+    puts "#{" "*4}2 - Edit\n"
+    puts "#{" "*4}00 - Back to menu\n"
+    print "#{" "*4}"
+    user_input = gets.chomp
+  end
+
+  def confirmation(f_name, l_name)
+    puts "Are you sure you want to delete contact #{f_name} #{l_name}?\n"
+    puts "1 - Yes"
+    puts "2 - Cancel"
+    puts "00 - Back to main menu"
+    opt = gets.chomp
+  end
 end
