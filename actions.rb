@@ -36,11 +36,16 @@ module Actions
 
     while true 
       if opt == "1"
-        contact = Contact.new(f_name, l_name, number)
-        contact_obj = { f_name: contact.f_name, l_name: contact.l_name, number: contact.number }
-        data << contact_obj
-        save(data)
-        break
+        if f_name.empty? || number.empty?
+          puts "First name or number cannot be empty"
+          f_name, l_name, number = edit_contact(f_name, l_name, number)
+          opt = summary(f_name, l_name, number)
+        else
+          contact_obj = { f_name: f_name, l_name: l_name, number: number }
+          data << contact_obj
+          save(data)
+          break
+        end
       elsif opt == "2"
         f_name, l_name, number = edit_contact(f_name, l_name, number)
         opt = summary(f_name, l_name, number)
