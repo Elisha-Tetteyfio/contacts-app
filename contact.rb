@@ -7,4 +7,12 @@ class Contact
     @number = number
   end
 
+  def to_obj
+    {
+      f_name: @f_name,
+      l_name: @l_name,
+      number: @number,
+    }
+  end
+
 end
