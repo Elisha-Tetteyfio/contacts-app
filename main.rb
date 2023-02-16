@@ -2,7 +2,12 @@ require "./contact"
 require 'json'
 
 def add_contact(f_name, l_name, number)
-  contact = Contact.new(f_name, l_name, number)
+  obj = {
+    f_name: @f_name,
+    l_name: @l_name,
+    number: @number,
+  }
+  contact = Contact.new(obj)
   File.open("contacts.txt", "a") do |file|
     file.puts contact.to_obj.to_json
   end
