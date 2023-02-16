@@ -14,10 +14,12 @@ def display_contacts
     contacts << line
   end
   # puts contacts
+  puts "\n"
   contacts.each_with_index do |c, i|
     c = JSON.parse(c)
     puts "#{i+1}. #{c["f_name"]} #{c["l_name"]} : #{c["number"]}"
   end
+  puts "\n"
   return contacts
 end
 
@@ -39,7 +41,7 @@ def main
     print "Enter number: "
     number = gets.strip
     add_contact(f_name, l_name, number)
-    puts "Contact added successfully."
+    puts "\nContact added successfully.\n\n"
     main
   when 2
     display_contacts
@@ -65,7 +67,7 @@ def main
     File.open("contacts.txt", "w") do |file|
       file.puts contacts
     end
-    puts "Contact updated successfully."
+    puts "\nContact updated successfully.\n\n"
     main
   when 4
     contacts = display_contacts
@@ -75,7 +77,7 @@ def main
     File.open("contacts.txt", "w") do |file|
       file.puts contacts
     end
-    puts "Contact deleted"
+    puts "\nContact deleted\n\n"
     main
   when 0
     
