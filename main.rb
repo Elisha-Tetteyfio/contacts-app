@@ -18,17 +18,14 @@ def main
     l_name = gets.chomp
     puts "Enter number"
     number = gets.chomp
-
+    #Create new contact
     con = Contact.new(f_name, l_name, number)
-    tempHash = {
-      fir
-    }
-    aa =con.to_json
-    puts aa
-
-    # File.open("contacts.txt", "a") do |file|
-    #   file.write(Marshal.dump(con), "\n")
-    # end
+    #Save contact to file
+    File.open("contacts.txt", "a") do |file|
+      file.write(Marshal.dump(con), "\n")
+    end
+    puts "Contact added successfully"
+    main
 
   elsif choice == "2"
     puts "Select contact to edit"
