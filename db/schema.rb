@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_16_170515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "contacts", id: :integer, default: nil, force: :cascade do |t|
-    t.text "f_name"
-    t.text "l_name"
-    t.text "number"
+  create_table "contacts", force: :cascade do |t|
+    t.string "f_name"
+    t.string "l_name"
+    t.string "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
