@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @suburb %>
+
+<div>
+  <%= link_to "Edit this suburb", edit_suburb_path(@suburb) %> |
+  <%= link_to "Back to suburbs", suburbs_path %>
+
+  <%= button_to "Destroy this suburb", @suburb, method: :delete %>
+</div>

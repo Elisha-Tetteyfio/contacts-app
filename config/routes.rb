@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :suburbs
   resources :cities
   resources :regions
   devise_for :users
