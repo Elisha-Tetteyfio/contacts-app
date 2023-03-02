@@ -50,8 +50,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_142913) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "role_code"
-    t.boolean "active_status"
-    t.boolean "del_status"
+    t.boolean "active_status", default: true
+    t.boolean "del_status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
