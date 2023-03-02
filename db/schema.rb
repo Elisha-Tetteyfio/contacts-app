@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_02_152407) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_02_152642) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_152407) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "permissions_roles", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "permission_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permission_id"], name: "index_permissions_roles_on_permission_id"
+    t.index ["role_id"], name: "index_permissions_roles_on_role_id"
   end
 
   create_table "regions", force: :cascade do |t|
@@ -107,6 +116,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_152407) do
   add_foreign_key "cities", "users"
   add_foreign_key "contacts", "suburbs"
   add_foreign_key "contacts", "users"
+  add_foreign_key "permissions_roles", "permissions"
+  add_foreign_key "permissions_roles", "roles"
   add_foreign_key "regions", "users"
   add_foreign_key "suburbs", "cities"
   add_foreign_key "suburbs", "users"
