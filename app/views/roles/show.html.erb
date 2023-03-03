@@ -1,10 +1,40 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @role %>
-
-<div>
-  <%= link_to "Edit this role", edit_role_path(@role) %> |
-  <%= link_to "Back to roles", roles_path %>
-
-  <%= button_to "Destroy this role", @role, method: :delete %>
-</div>
+<h2><%= @role.name %> Permission Details</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+            </div>
+            <table class="table table-striped custab table-responsive table-hover table-condensed table-bordered">
+              <thead>
+              <tr>
+                <th class="header">Controller Name</th>
+                <th class="header">Action</th>
+                <th class="header">Name</th>
+                <th class="header">Desc</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @permissions.each do |permission| %>
+                <tr>
+                  <td> <%= permission.subject_class %> </td>
+                  <td> <%= permission.action %> </td>
+                  <td> <%= permission.name %> </td>
+                  <td> <%= permission.description %> </td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          <%= link_to 'Edit Role', edit_role_path(@role), :class => "btn btn-primary" %>
+          <%= link_to 'Back', roles_path, :class => "btn btn-danger" %>

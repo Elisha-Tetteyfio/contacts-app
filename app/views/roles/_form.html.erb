@@ -1,16 +1,47 @@
-
 <%= simple_form_for(@role) do |f| %>
   <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-group">
+    <%= f.input :name, required: true, autofocus: true, :class => 'form-control' %>
+  </div>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :role_code %>
-    <%= f.input :active_status %>
-    <%= f.input :del_status %>
+      <p>Permissions</p>
+      <table class="table table-striped table-responsive table-hover table-condensed table-bordered">
+        <tr>
+          <th> Class</th>
+          <th> Action</th>
+          <th><input type="checkbox" onClick="toggle(this)" /> All<br/></th>
+        </tr>
+
+        <% @permissions.each do |permission| %>
+        <tr>
+          <td> <%= permission.subject_class %> </td>
+          <td> <%= permission.action %> </td>
+          <td> <%= check_box_tag 'permissions[]', permission.id, @role_permissions.include?(permission.id), {array: true, class: "check_box"} %> </td>
+        </tr>
+        <% end %>
+    </table>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+      <%= f.button :submit %>
+      <%= link_to 'Back', roles_path, :class => "btn btn-danger" %>
   </div>
-<% end %>
+
+
+        </fieldset>
+        </div>
+
+      </div>
+      <% end %>
+
+
+<script type="text/javascript">
+  function toggle(source) {
+    checkboxes = document.getElementsByName('permissions[]');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+      checkboxes[i].checked = source.checked;
+    }
+  }
+</script>

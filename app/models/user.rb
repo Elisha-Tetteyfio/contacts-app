@@ -4,5 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :contacts
-  has_many :roles, through: :user_roles
+  has_one :user_role
+  has_many :roles, through: :user_role
+
+  def super_admin?
+    roles.where(role_code: "SA").present?
+  end
 end
