@@ -1,2 +1,85 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+body {
+    background-color: rgb(72, 72, 116);
+}
+
+.signinPage {
+    display: flex;
+}
+
+.loginMenu {
+    width: 45%;
+    background-color: #fff;
+    height: 90vh;
+    margin: auto 2rem;
+    border-radius: 30px;
+    padding: 3% 10%;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    justify-content: center;
+    // overflow-y: scroll;
+}
+.loginMenu a {
+    color: rgb(219, 170, 35);
+    text-decoration: none;
+}
+.form-control {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px black solid;
+    width: 100%;
+}
+
+.form-control{
+    &:focus{
+        border: 1px solid #000 !important;
+        outline: none !important;
+        box-shadow: none;
+    }
+}
+
+.form-inputs label {
+    color: #909090;
+    font-size: small;
+}
+
+.form-inputs {
+    margin-top: 2rem;
+    width: 100%;
+
+}
+
+.signin {
+    color: white;
+    background-color: rgb(219, 170, 35);
+    width: 100%;
+    border-radius: 10px;
+}
+
+.signin:hover {
+    background-color: rgb(72, 72, 116);
+}
+
+.sign_blank {
+    display: inline;
+    width: 40%;
+    margin: auto;
+    color: #fff;
+    font-size: large;
+    font-weight: 600;
+}
+
+.dd {
+    width: 100% !important;
+}
+
+.form-field {
+    outline: none
+}
+
+input {
+    outline: none
+}

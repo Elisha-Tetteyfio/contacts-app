@@ -1,20 +1,36 @@
-<h2>Log in</h2>
+<div class="signinPage">
+  <div class="loginMenu">
+    <div>Welcome,</div>
+    <h2>Login!</h2>
+    <div>
+      New user?
+      <%= link_to "Sign up", new_user_registration_path %>
+    </div>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :email,
+                    required: true,
+                    class: "form-field",
+                    label: "Email"
+                    %>
+        <%= f.input :password,
+                    required: false,
+                    input_html: { autocomplete: "current-password" } %>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Log in", class: "signin" %>
+      </div>
+    <% end %>
+
+    <%#= render "devise/shared/links" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+  <div class="sign_blank">
+    Smart and quick digital collaboration platform for 
+    Startups & Investors to validate and invest on deals
   </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+</div>
