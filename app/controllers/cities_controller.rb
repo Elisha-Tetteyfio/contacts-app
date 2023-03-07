@@ -3,8 +3,18 @@ class CitiesController < ApplicationController
 
   # GET /cities or /cities.json
   def index
-    @cities = City.all
+    # @cities = City.all
+    @region = Region.find(params[:region_id])
+
+  @cities = City.where(region_id: @region.id)
+  render json: @cities
   end
+
+  def city_query
+    @region_cities = Region.find(params[:region_id]).cities
+    render json: @region_cities
+  end
+
 
   # GET /cities/1 or /cities/1.json
   def show

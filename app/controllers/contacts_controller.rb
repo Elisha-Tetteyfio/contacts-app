@@ -12,7 +12,16 @@ class ContactsController < ApplicationController
 
   # GET /contacts/new
   def new
+    @region = Region.find_by(id: params[:region].presence)
+    @city = City.find_by(id: params[:city].presence)
+    @suburb = Suburb.find_by(id: params[:suburb].presence)
+
+    @regions = Region.all
+    @cities = @region&.cities || []
+    @suburbs = @city&.suburbs || []
     @contact = Contact.new
+
+    
   end
 
   # GET /contacts/1/edit

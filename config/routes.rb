@@ -5,8 +5,15 @@ Rails.application.routes.draw do
   resources :roles
   resources :contacts
   resources :suburbs
-  resources :cities
-  resources :regions
+  resources :cities do
+    # get 'suburb_query', to: 'suburbs#suburbs_query'
+  end
+  resources :regions do
+    get 'city_query', to: 'cities#city_query'
+    resources :cities do
+      get 'suburb_query', to: 'suburbs#suburb_query'
+    end
+  end
   devise_for :users
   resources :users
 

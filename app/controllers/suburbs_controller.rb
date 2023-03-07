@@ -19,6 +19,11 @@ class SuburbsController < ApplicationController
   def edit
   end
 
+  def suburb_query
+    @city_suburbs = City.find(params[:city_id]).suburbs
+    render json: @city_suburbs
+  end
+
   # POST /suburbs or /suburbs.json
   def create
     @suburb = Suburb.new(suburb_params)
