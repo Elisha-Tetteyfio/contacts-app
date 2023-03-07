@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
-    load_and_authorize_resource
     before_action :authenticate_user!
+    # load_and_authorize_resource
 
 
     rescue_from CanCan::AccessDenied do |exception|
