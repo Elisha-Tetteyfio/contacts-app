@@ -1,0 +1,60 @@
+<nav class="navbar navbar-default ">
+    <div>
+        <div>
+            <div class="imgDiv"> 
+                <%= image_tag "contacts.svg" %> 
+            </div>
+            <div class="navLinkDiv">
+                <%= link_to "Contacts", contacts_path %>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="imgDiv"> 
+                <%= image_tag "users.svg" %> 
+            </div>
+            <div class="navLinkDiv">
+                <%= link_to "Other users", users_path %>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="imgDiv"> 
+                <%= image_tag "regions.svg" %> 
+            </div>
+            <div class="navLinkDiv">
+                <%= link_to "Regions", regions_path %>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="imgDiv"> 
+                <%= image_tag "cities.svg" %> 
+            </div>
+            <div class="navLinkDiv">
+                <%= link_to "Cities", cities_path %>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="imgDiv"> 
+                <%= image_tag "suburbs.svg" %> 
+            </div>
+            <div class="navLinkDiv">
+                <%= link_to "Suburbs", suburbs_path %>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="imgDiv"> 
+                <%= image_tag "roles.svg" %> 
+            </div>
+            <div class="navLinkDiv">
+                <%= link_to "Roles & permissions", roles_path %>
+            </div>
+        </div>
+    </div>
+    <div class="signout">
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+    </div>
+</nav>
