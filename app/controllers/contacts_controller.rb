@@ -26,6 +26,13 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
+    @region = @contact.suburb.city.region
+    @city = @contact.suburb.city
+    @suburb = @contact.suburb
+
+    @regions = Region.all
+    @cities = @region&.cities || []
+    @suburbs = @city&.suburbs || []
   end
 
   # POST /contacts or /contacts.json

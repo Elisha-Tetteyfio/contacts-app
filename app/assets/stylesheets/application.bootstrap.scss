@@ -9,8 +9,16 @@ body {
     width: 72%;
     // background-color: yellow;
     margin-left: 25%;
+    margin-top: 2rem;
     border-radius: 10px;
-    background-color: #909090;
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.page {
+    // width: 90%;
+    background-color: rgb(72, 72, 116);
+    border-radius: 10px;
 }
 
 .signinPage {
@@ -194,4 +202,9 @@ input {
 
 .actions {
     display: flex;
+}
+
+.contactSec {
+    font-size: small;
+    font-style: italic;
 }

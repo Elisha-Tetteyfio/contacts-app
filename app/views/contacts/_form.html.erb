@@ -3,13 +3,32 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
+  <div class="form-inputs" data-controller="region">
     <%= f.input :fname %>
     <%= f.input :lname %>
     <%= f.input :phone %>
     <%= f.input :birth_date %>
     <%= f.input :email %>
-    <%= f.association :suburb %>
+    <%= @contact.suburb.name %>
+
+    <div class="form-group">
+      <%= f.select :region_id, 
+      options_from_collection_for_select(@regions, "id", "name", @region&.id),
+      {prompt: "Select a region"}, 
+      {data: {action: "change->region#change"},
+      selected: @region} %>
+    </div>
+    <div class="form-group">
+      <%= f.select :city_id,
+      options_from_collection_for_select(@cities, "id", "name", @city&.id),
+       {prompt: "Select a city"} ,
+       {id: "city-select", readonly: :true, data: {action: "change->region#change1"} }%>
+    </div>
+    <div class="form-group">
+      <%= f.input :suburb_id, collection: @suburbs, prompt: "Select a suburb" , 
+      input_html: { id: "suburb-select", readonly: :true }, selected: @suburb.id %>
+      
+    </div>
   </div>
 
   <div class="form-actions">

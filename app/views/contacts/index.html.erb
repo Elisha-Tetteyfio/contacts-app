@@ -1,18 +1,62 @@
-<p style="color: green"><%= notice %></p>
+<div class="page">
+  <p style="color: green"><%= notice %></p>
 
-<div class="contactTop">
-  <h1>Contacts</h1>
-  <div class="contactNew">
-    <%= link_to " + Add contact", new_contact_path %>
+  <div class="contactTop">
+    <h1>Contacts</h1>
+    <div class="contactNew">
+      <%= link_to " + Add contact", new_contact_path %>
+    </div>
   </div>
-</div>
 
-<div id="contacts">
-<% i = 1 %>
-  <% @contacts.each do |contact| %>
-    <%= render contact, i: i %>
-    <% i += 1 %>
-  <% end %>
+  <fieldset id="contacts">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="header">#</th>
+          <th class="header">Name</th>
+          <th class="header">Contact details</th>
+          <th class="header">Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% i = 1 %>
+        <% @contacts.each do |contact| %>
+          <tr>
+            <td> <%= i %> </td>
+            <td> <%= contact.fname %> <%= contact.lname %>  </td>
+            <td> 
+              <%= contact.phone %> 
+              <div class="contactSec"><%= contact.email %></div>
+            </td>
+            <td> 
+              <%= contact.suburb.name %> 
+              <div class="contactSec"><%= contact.suburb.city.name %> >> <%= contact.suburb.city.region.name %></div>
+            </td>
+            <td> 
+              <div class="actions">
+                <div class="actionDiv">
+                  <%= link_to contact do %>
+                    <%= image_tag "show.svg" %>
+                  <% end %>
+                </div>
+                <div class="actionDiv">
+                  <%= link_to edit_contact_path(contact) do %>
+                    <%= image_tag "edit.svg" %>
+                  <% end %>
+                </div>
+                <div class="actionDiv">
+                  <%= button_to contact, method: :delete do %>
+                    <%= image_tag "delete.svg" %>
+                  <% end %>
+                </div>  
+              </div>
+            </td>
+          </tr>
+          
+          <% i += 1 %>
+        <% end %>
+      </tbody>
+    </table>
+  </fieldset>
 </div>
-
 

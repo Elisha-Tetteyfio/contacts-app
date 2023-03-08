@@ -23,7 +23,7 @@ export default class extends Controller {
         });
     };
     change1(event){
-      citySelect.addEventListener("change", () => { 
+      // citySelect.addEventListener("change", () => { 
         cityId = event.target.selectedOptions[0].value; 
         // const regionId = params[:region]
         fetch(`/regions/${regionId}/cities/${cityId}/suburb_query.json`)
@@ -38,6 +38,6 @@ export default class extends Controller {
               suburbSelect.appendChild(option);
               });
             });
-        });
+        // });
       }
   }
