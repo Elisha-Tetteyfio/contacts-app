@@ -1,0 +1,14 @@
+<div class="header">
+    <div class="greet">
+        Hello
+        <%= current_user.fname %>
+    </div>
+    <div class="signout">
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+    </div>
+</div>
+<div class="header1">
+    <%- if controller_name == 'contacts' %>
+        <div>Contacts</div>
+    <% end %>
+</div>

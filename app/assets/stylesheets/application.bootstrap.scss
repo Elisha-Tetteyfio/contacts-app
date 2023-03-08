@@ -2,17 +2,21 @@
 @import 'bootstrap-icons/font/bootstrap-icons';
 
 body {
-    background-color: rgb(72, 72, 116);
+    // background-color: rgb(72, 72, 116);
 }
 
 #content {
-    width: 72%;
+    width: 71%;
     // background-color: yellow;
-    margin-left: 25%;
+    margin-left: 27%;
     // margin-top: 2rem;
-    // border-radius: 10px;
-    background-color: #fff;
-    padding: 1rem;
+    border-radius: 10px;
+    // background-color: #fff;
+    // padding: 1rem;
+    // height: 100vh;
+    box-shadow: 3px 3px 5px 1px #bbb;
+    position: relative;
+    top: -2rem;
 }
 
 .page {
@@ -106,6 +110,7 @@ input {
     position: fixed;
     top: 0;
     display: block;
+    background-color: rgb(72, 72, 116);
 
     hr {
         color: #dbaa23;
@@ -120,10 +125,8 @@ input {
 
     div {
         width: 100%;
-        // height: 3em;
 
         div {
-            // background-color: #909090;
             width: 80%;
             display: flex;
             height: 3em;
@@ -147,10 +150,33 @@ input {
             }
         }
     }
-    .signout {
-        align-self: flex-end;
-        width: 75%;
+}
+
+.header {
+    margin-left: 25%;
+    display: flex;
+    justify-content: space-between;
+    height: 10vh;
+    background-color: #fff;
+    align-items: center;
+
+    .greet {
+        font-size: x-large;
+        color: #dbaa23;
+        font-size: x-large;
+        font-style: italic;
     }
+
+    .signout {
+        margin-right: 30px;
+    }
+}
+
+.header1 {
+    margin-left: 25%;
+    font-size: x-large;
+    background-color: rgb(72, 72, 116);
+    height: 8vh;
 }
 
 .contact1 {
