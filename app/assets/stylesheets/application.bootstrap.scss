@@ -138,3 +138,60 @@ input {
         width: 75%;
     }
 }
+
+.contact1 {
+    display: flex;
+}
+
+.contact {
+    display: flex;
+    border: #000 1px dashed;
+    border-radius: 5px;
+    box-shadow: 2px 2px;
+}
+
+.contactLeft {
+    width: 40%;
+    // border-right: #000 1px solid;
+}
+
+.contactRight {
+    width: 40%;
+}
+
+.contactName {
+    font-size: x-large;
+}
+
+.contactLocation {
+    font-size: small;
+    font-style: italic;
+}
+
+.contactNew {
+    border:rgb(72, 72, 116) 1px solid;
+    border-radius: 5px;
+}
+
+.contactNew a {
+    color: #000;
+    text-decoration: none;
+}
+
+.contactTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actionDiv {
+    width: 30px;
+}
+
+.actionDiv img {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+}

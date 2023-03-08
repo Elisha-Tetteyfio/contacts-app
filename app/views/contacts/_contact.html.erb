@@ -1,20 +1,42 @@
-<div id="<%= dom_id contact %>">
-  <p>
-    <strong>Fname:</strong>
-    <%= contact.fname %>
-  </p>
+<fieldset id="<%= dom_id contact %>" class="contact m-2">
+  <div class="contactLeft">
+    <div class="contactName">
+      <%= i %>.
+      <%= contact.fname %> <%= contact.lname %>
+    </div>
+    <div class="contactLocation">
+      <%= contact.suburb.name %> >> <%= contact.suburb.city.name %> >> 
+      <%= contact.suburb.city.region.name %>
+    </div>
+  </div>
+  <div class="contactRight">
+    <div class="contactName">
+      <%= contact.phone %>
+    </div>
+    <div class="contactLocation">
+      <%= contact.email %>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="actionDiv">
+      <%= link_to contact do %>
+        <%= image_tag "show.svg" %>
+      <% end %>
+    </div>
+    <div class="actionDiv">
+      <%= link_to edit_contact_path(contact) do %>
+        <%= image_tag "edit.svg" %>
+      <% end %>
+    </div>
+    <div class="actionDiv">
+      <%= button_to contact, method: :delete do %>
+        <%= image_tag "delete.svg" %>
+      <% end %>
+    </div>    
+  </div>
 
-  <p>
-    <strong>Lname:</strong>
-    <%= contact.lname %>
-  </p>
 
-  <p>
-    <strong>Phone:</strong>
-    <%= contact.phone %>
-  </p>
-
-  <p>
+  <!--<p>
     <strong>Birth date:</strong>
     <%= contact.birth_date %>
   </p>
@@ -32,6 +54,6 @@
   <p>
     <strong>Suburb:</strong>
     <%= contact.suburb_id %>
-  </p>
+  </p>-->
 
-</div>
+</fieldset>

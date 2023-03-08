@@ -1,6 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @contact %>
+<%#= render @contact %>
+<div>
+  <%= @contact.name %>
+</div>
 
 <div>
   <%= link_to "Edit this contact", edit_contact_path(@contact) %> |

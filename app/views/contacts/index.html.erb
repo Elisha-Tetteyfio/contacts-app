@@ -1,16 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Contacts</h1>
+<div class="contactTop">
+  <h1>Contacts</h1>
+  <div class="contactNew">
+    <%= link_to " + Add contact", new_contact_path %>
+  </div>
+</div>
 
 <div id="contacts">
+<% i = 1 %>
   <% @contacts.each do |contact| %>
-    <%= render contact %>
-    <p>
-      <%= link_to "Show this contact", contact %>
-    </p>
+    <%= render contact, i: i %>
+    <% i += 1 %>
   <% end %>
 </div>
 
-<%= link_to "New contact", new_contact_path %>
-<%= button_to "Sign out", destroy_user_session_path, method: :delete %>
 
