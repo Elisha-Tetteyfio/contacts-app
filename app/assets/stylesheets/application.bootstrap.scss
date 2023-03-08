@@ -9,8 +9,8 @@ body {
     width: 72%;
     // background-color: yellow;
     margin-left: 25%;
-    margin-top: 2rem;
-    border-radius: 10px;
+    // margin-top: 2rem;
+    // border-radius: 10px;
     background-color: #fff;
     padding: 1rem;
 }
@@ -102,25 +102,31 @@ input {
 
 .navbar {
     width: 25%;
-    // background-color: #000;
     height: 100vh;
     position: fixed;
     top: 0;
-    align-items: flex-start ;
+    display: block;
+
+    hr {
+        color: #dbaa23;
+    }
+
+    .title {
+        font-size: x-large;
+        text-align: center;
+        color: #fff;
+        font-style: italic;
+    }
 
     div {
         width: 100%;
-        height: 3em;
-
-        hr {
-            color: #909090;
-            margin: 0;
-        }
+        // height: 3em;
 
         div {
             // background-color: #909090;
             width: 80%;
             display: flex;
+            height: 3em;
 
             .imgDiv {
                 width: 30%;
