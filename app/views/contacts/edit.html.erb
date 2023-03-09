@@ -1,6 +1,10 @@
 <div class="page">
-  <%= link_to raw("<i class='bi-arrow-left-circle backIcon'  style='font-size: 2rem;'></i>"), contacts_path %>
-  <h1 class="my-3" style="color: rgb(72, 72, 116);">Editing contact</h1>
+  <div class="d-flex justify-content-between">
+    <h3 class="m-4" style="color: rgb(72, 72, 116);">
+      <%= link_to raw("<i class='bi-arrow-left-circle backIcon'></i>"), contacts_path %>
+        Editing contact
+    </h3>
+  </div>
 
   <%= render "form", contact: @contact %>
 

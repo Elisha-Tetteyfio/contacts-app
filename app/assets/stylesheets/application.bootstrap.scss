@@ -241,7 +241,7 @@ input {
 }
 
 .form-input select, .form-input input {
-    border: rgb(72, 72, 116) dashed 1px;
+    border: rgb(72, 72, 116) dashed 1px !important;
     width: 50%;
     border-radius: 5px;   
 }
