@@ -4,10 +4,22 @@ class ContactsController < ApplicationController
   # GET /contacts or /contacts.json
   def index
     @contacts = Contact.all
+    
+    respond_to do |format|
+      format.js
+      format.html
+      format.json
+      
+    end
   end
 
   # GET /contacts/1 or /contacts/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.js
+    end
   end
 
   # GET /contacts/new
@@ -20,6 +32,11 @@ class ContactsController < ApplicationController
     @cities = @region&.cities || []
     @suburbs = @city&.suburbs || []
     @contact = Contact.new
+    respond_to do |format|
+      format.html
+      format.json
+      format.js
+    end
 
     
   end
@@ -67,6 +84,11 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1 or /contacts/1.json
   def destroy
     @contact.destroy
+    respond_to do |format|
+      format.html
+      format.json
+      format.js
+    end
 
     respond_to do |format|
       format.html { redirect_to contacts_url, notice: "Contact was successfully destroyed." }

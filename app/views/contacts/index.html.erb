@@ -2,8 +2,8 @@
   <p style="color: green"><%= notice %></p>
 
   <div class="contactTop">
-    <h1>Contacts</h1>
-    <div class="contactNew">
+    <h1>My contacts</h1>
+    <div class="contactNew btn">
       <%= link_to " + Add contact", new_contact_path %>
     </div>
   </div>
@@ -34,29 +34,44 @@
             </td>
             <td> 
               <div class="actions">
-                <div class="actionDiv">
-                  <%= link_to contact do %>
-                    <%= image_tag "show.svg" %>
-                  <% end %>
+                  <%= link_to raw("<i class=\"bi-eye btn border\"></i>"), contact%>
+                  <%= link_to raw("<i class=\"bi-pen btn border\"></i>"), edit_contact_path(contact)%>
+                  <button type="button" class="btn border" data-bs-target="#confirmationModal" data-bs-toggle="modal" contact=contact>
+                    <i class="bi-trash"></i>
+                  </button>
+                  <div class="modal fade" id="confirmationModal" tabindex="-1" 
+                    aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                      <div class="modal-dialog"> 
+                        <div class="modal-content">                      
+                          <div class="modal-header">                        
+                          </div>                      
+                          <div class="modal-body"> 
+                          <%= render "contacts/menu", contact: contact %>                       
+                          </div>                      
+                          <div class="modal-footer">  
+                                                
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                        
+                            <%#= button_to raw("<i class=\"bi bi-trash\"></i> Delete"), contact_path(contact), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this contact?" } %>                      
+                    </div>
+                  </div>
                 </div>
-                <div class="actionDiv">
-                  <%= link_to edit_contact_path(contact) do %>
-                    <%= image_tag "edit.svg" %>
-                  <% end %>
-                </div>
-                <div class="actionDiv">
-                  <%= button_to contact, method: :delete do %>
-                    <%= image_tag "delete.svg" %>
-                  <% end %>
+              </div> 
                 </div>  
               </div>
             </td>
           </tr>
-          
           <% i += 1 %>
         <% end %>
       </tbody>
     </table>
   </fieldset>
 </div>
+
+
+<!--button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+  <i class="bi bi-trash"></i>                
+</!--button>-->
+<!-- Modal -->
+
+
 

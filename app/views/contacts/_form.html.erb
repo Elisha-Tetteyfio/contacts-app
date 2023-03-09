@@ -16,13 +16,13 @@
       options_from_collection_for_select(@regions, "id", "name", @region&.id),
       {prompt: "Select a region"}, 
       {data: {action: "change->region#change"},
-      selected: @region} %>
+      selected: @region, class: "form-select"} %>
     </div>
     <div class="form-group">
       <%= f.select :city_id,
       options_from_collection_for_select(@cities, "id", "name", @city&.id),
        {prompt: "Select a city"} ,
-       {id: "city-select", readonly: :true, data: {action: "change->region#change1"} }%>
+       {id: "city-select", readonly: :true, data: {action: "change->region#change1"}, class: "form-select" }%>
     </div>
     <div class="form-group">
       <%= f.input :suburb_id, collection: @suburbs, prompt: "Select a suburb" , 
