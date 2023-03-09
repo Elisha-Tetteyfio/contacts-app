@@ -230,3 +230,36 @@ input {
     font-size: small;
     font-style: italic;
 }
+
+.form-input label {
+    color: #909090;
+    font-size: small;
+}
+
+.form-input {
+    margin-top: 2rem;
+}
+
+.form-input select, .form-input input {
+    border: rgb(72, 72, 116) dashed 1px;
+    width: 50%;
+    border-radius: 5px;   
+}
+
+.form-input select:focus, .form-input input:focus {
+    &:focus{
+        border: 1px solid #000 !important;
+        box-shadow: #dbaa23;
+        box-shadow: 0 0 0 0.25rem rgb(72, 72, 116, 0.25);
+    }
+}
+
+.form-input button {    
+    background-color: #dbaa23;
+    color: #fff;
+}
+
+.form-input button:hover {    
+    background-color: rgb(72, 72, 116);
+    color: #fff;
+}

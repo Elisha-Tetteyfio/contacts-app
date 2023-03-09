@@ -39,5 +39,9 @@ export default class extends Controller {
               });
             });
         // });
+      };
+
+      modall(event){
+        console.log(event.target.selectedOptions[0].value)
       }
   }
