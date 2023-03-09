@@ -263,3 +263,11 @@ input {
     background-color: rgb(72, 72, 116);
     color: #fff;
 }
+
+.backIcon {
+    color: #dbaa23;
+
+    &:hover {
+        color: rgb(72, 72, 116);
+    }
+}
