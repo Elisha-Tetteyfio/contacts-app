@@ -10,7 +10,6 @@
     <%= f.input :phone, label: "Phone number" %>
     <%= f.input :birth_date, label: "Date of birth" %>
     <%= f.input :email %>
-    <%= @contact.suburb.name %>
 
     <div class="form-group">
     <%= f.label "Region "%>
@@ -29,7 +28,7 @@
     </div>
     <div class="form-group">
       <%= f.input :suburb_id, collection: @suburbs, prompt: "Select a suburb" , 
-      input_html: { id: "suburb-select", readonly: :true }, selected: @suburb.id %>
+      input_html: { id: "suburb-select", readonly: :true }, selected: @suburb&.id %>
       
     </div>
     <button type="submit" class="btn">

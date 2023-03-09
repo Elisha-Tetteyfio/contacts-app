@@ -1,53 +1,10 @@
-<h1>New contact</h1>
+<div class="page">
+  <%= link_to raw("<i class='bi-arrow-left-circle backIcon'  style='font-size: 2rem;'></i>"), contacts_path %>
+  <h1 class="my-3" style="color: rgb(72, 72, 116);">New contact</h1>
 
-<%#= render "form", contact: @contact %>
+  <%= render "form", contact: @contact %>
 
-<%= simple_form_for(@contact) do |f| %>
-  
-<div data-controller="region">
-  <div class="form-inputs">
-    <%= f.input :fname %>
-    <%= f.input :lname %>
-    <%= f.input :phone %>
-    <%= f.input :birth_date %>
-    <%= f.input :email %>
+  <br>
 
-    <div class="form-group">
-      <%= f.select :region, options_from_collection_for_select(@regions, "id", "name", @region&.id), {prompt: "Select a region"} , 
-      {data: {action: "change->region#change"}} %>
-    </div>
+</div>
 
-    <div class="form-group">
-      <%= f.select :city,[], {prompt: "Select a city"} ,
-       {id: "city-select", readonly: :true, data: {action: "change->region#change1"} }%>
-    </div>
-    <div class="form-group">
-      <%= f.input :suburb_id, collection: [], prompt: "Select a suburb" , 
-      input_html: { id: "suburb-select", readonly: :true } %>
-      
-    </div>
-    <%#= f.association :suburb %>
-  </div>
-
-    <div class="form-actions">
-      <%= f.button :submit %>
-    </div>
-  </div>
-<% end %>
-
-<!--<div>
-  <%= form_tag new_contact_path, method: :get do %>
-    <%= select_tag :region, options_from_collection_for_select(@regions, "id", "name", @region&.id),
-      prompt: "--region--", onchange: "this.form.submit()" %>
-    <%= select_tag :city, options_from_collection_for_select(@cities, "id", "name", @city&.id),
-      prompt: "--city--", onchange: "this.form.submit()" %>
-    <%= select_tag :suburb, options_from_collection_for_select(@suburbs, "id", "name", @suburb&.id),
-      prompt: "--suburb--", onchange: "this.form.submit()" %>
-  <% end %>
-</div> -->
-
-<!--br>
-
-<div>
-  <%= link_to "Back to contacts", contacts_path %>
-</div> -->

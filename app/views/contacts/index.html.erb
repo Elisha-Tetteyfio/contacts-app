@@ -2,7 +2,7 @@
   <p style="color: green"><%= notice %></p>
 
   <div class="contactTop">
-    <h1>My contacts</h1>
+    <h1 class="mb-4" style="color: rgb(72, 72, 116);">My contacts</h1>
     <div class="contactNew btn">
       <%= link_to " + Add contact", new_contact_path %>
     </div>
@@ -48,7 +48,8 @@
                     aria-labelledby="confirmationModalLabel" aria-hidden="true">
                       <div class="modal-dialog"> 
                         <div class="modal-content">                      
-                          <div class="modal-header">                        
+                          <div class="modal-header"> 
+                          <h3>Confirmation</h3>                       
                           </div>                      
                           <div class="modal-body"> 
                           <%#= render "contacts/menu", contact: contact %>
