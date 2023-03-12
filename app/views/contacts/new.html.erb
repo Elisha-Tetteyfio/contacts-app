@@ -1,12 +1,15 @@
 <div class="page">
-  <div class="d-flex justify-content-between">
-    <h2 class="m-3" style="color: rgb(72, 72, 116);">
-      <%= link_to raw("<i class='bi-arrow-left-circle backIcon'></i>"), contacts_path %>
-      New contact
-    </h2>
-  </div>
+  <fieldset>
+    <div class="">
+      <legend class="m-3" style="color: rgb(72, 72, 116);">
+        <%= link_to raw("<i class='bi-arrow-left-circle backIcon'></i>"), contacts_path %>
+        New contact
+      </legend>
+      <hr>
+    </div>
 
-  <%= render "form", contact: @contact %>
+    <%= render "form", contact: @contact %>
+  </fieldset>
 
   <br>
 

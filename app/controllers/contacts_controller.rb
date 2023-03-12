@@ -28,17 +28,16 @@ class ContactsController < ApplicationController
     @city = City.find_by(id: params[:city].presence)
     @suburb = Suburb.find_by(id: params[:suburb].presence)
 
-    @regions = Region.all
+    @regions = Region.all || []
     @cities = @region&.cities || []
     @suburbs = @city&.suburbs || []
+    @dob = ''
     @contact = Contact.new
     respond_to do |format|
       format.html
       format.json
       format.js
     end
-
-    
   end
 
   # GET /contacts/1/edit
@@ -46,6 +45,7 @@ class ContactsController < ApplicationController
     @region = @contact.suburb.city.region
     @city = @contact.suburb.city
     @suburb = @contact.suburb
+    @dob = @contact.birth_date.strftime("%Y-%m-%d").to_s
 
     @regions = Region.all
     @cities = @region&.cities || []
@@ -56,6 +56,10 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     @contact.user = current_user
+
+    @regions = Region.all
+    @cities = @region&.cities || []
+    @suburbs = @city&.suburbs || []
 
     respond_to do |format|
       if @contact.save
@@ -104,6 +108,6 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:fname, :lname, :phone, :birth_date, :email, :user_id, :suburb_id)
+      params.require(:contact).permit(:fname, :lname, :phone, :birth_date, :email, :user_id, :suburb_id, :region_id, :city_id)
     end
 end

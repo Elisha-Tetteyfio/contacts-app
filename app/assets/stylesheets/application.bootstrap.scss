@@ -238,11 +238,12 @@ input {
 
 .form-input {
     margin-top: 2rem;
+    width: 50%;
+    margin: auto
 }
 
 .form-input select, .form-input input {
     border: rgb(72, 72, 116) dashed 1px !important;
-    width: 50%;
     border-radius: 5px;   
 }
 
@@ -270,4 +271,8 @@ input {
     &:hover {
         color: rgb(72, 72, 116);
     }
+}
+
+.invalid-feedback {
+    display: none !important;
 }
