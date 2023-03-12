@@ -1,16 +1,30 @@
-
 <%= simple_form_for(@user) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :fname %>
-    <%= f.input :lname %>
-    <%= f.input :phone %>
-    <%= f.input :birth_date %>
-  </div>
+  <div class="form-input m-auto" data-controller="region">
+    <%= f.input :fname, label: "First name", input_html: {class: "m-auto"} %>
+    <%= f.input :lname, label: "Last name" %>
+    <%= f.input :phone, label: "Phone number" %>
+    <%= f.input :email %>
+    <label for="user[birth_date]">Date of birth</label><br>
+    <input type="date" name="user[birth_date]" class="form-control" value=@dob />
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+    <% if current_page?(action: 'new') %>
+      <%= f.input :password,
+        required: true,
+        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+      %>
+      <%= f.input :password_confirmation,
+        required: true,
+        input_html: { autocomplete: "new-password" } 
+      %>
+      <%#= f.input :role %>
+    <% end %>
+    <button type="submit" class="btn">
+      Save
+    </button>
+    
   </div>
 <% end %>
+

@@ -1,15 +1,51 @@
-<p style="color: green"><%= notice %></p>
+<div class="page">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
+  <div class="contactTop flex-row-reverse">
+    <div class="contactNew btn align-right mt-2">
+      <%= link_to "+ Add user", new_user_path %>
+    </div>
+  </div>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+  <div>
+    <fieldset id="contacts" data-controller="region">
+      <legend class="mb-4" style="color: rgb(72, 72, 116);">All users</legend>
+      <hr>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="header">#</th>
+            <th class="header">First name</th>
+            <th class="header">Last name</th>
+            <th class="header">Phone</th>
+            <th class="header">Email</th>
+            <th class="header">Birth date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% i = 1 %>
+          <% @users.each do |user| %>
+            <tr>
+              <td> <%= i %> </td>
+              <td> <%= user.fname %> </td>
+              <td> <%= user.lname %> </td>
+              <td> <%= user.phone %> </td>              
+              <td> <%= user.email %> </td>
+              <td> <%= user.birth_date %> </td>
+              <td>
+                <div class="actions">
+                    <%= link_to raw("<i class=\"bi-eye btn border\"></i>"), user %>
+                    <%= link_to raw("<i class=\"bi-pen btn border\"></i>"), edit_user_path(user)%>
+                    <button type="button" class="btn border" data-bs-target="#confirmationModal" data-bs-toggle="modal" action= "click->region#modall" >
+                      <i class="bi-trash"></i>
+                    </button>
+                </div>
+              </td>
+            </tr> 
+            <% i += 1 %>
+          <% end %>
+        </tbody>
+      </table>
+      <%#= will_paginate @users, class: " btn", previous_label: "<", next_label: ">", link_separator: " | ", inner_window: 0 %>
+    </fieldset>
 </div>
-
-<%= link_to "New user", new_user_path %>
-<%= button_to "Sign out", destroy_user_session_path, method: :delete %>
