@@ -3,8 +3,10 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.all
-    
+    # @contacts = Contact.all
+    # @contacts  = Contact.paginate(page: params[:page])
+    @contacts = Contact.paginate(:page => params[:page], :per_page => 5)
+
     respond_to do |format|
       format.js
       format.html

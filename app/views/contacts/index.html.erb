@@ -26,8 +26,9 @@
         <tbody>
           <% i = 1 %>
           <% @contacts.each do |contact| %>
+          <% no = 5*(params[:page].to_i - 1) + i %>
             <tr>
-              <td> <%= i %> </td>
+              <td> <%= no %> </td>
               <td> <%= contact.fname %> <%= contact.lname %>  </td>
               <td> 
                 <%= contact.phone %> 
@@ -76,6 +77,7 @@
           <% end %>
         </tbody>
       </table>
+      <%= will_paginate @contacts, class: " btn", previous_label: "<", next_label: ">", link_separator: " | ", inner_window: 0 %>
     </fieldset>
   <% end %>
 </div>
