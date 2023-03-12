@@ -3,9 +3,12 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    # @contacts = Contact.all
-    # @contacts  = Contact.paginate(page: params[:page])
-    @contacts = Contact.paginate(:page => params[:page], :per_page => 5)
+    @contacts = Contact.paginate(:page => params[:page], :per_page => 5).order(created_at: :desc)
+    @suburbs = Suburb.all.order(name: :asc)
+
+    if params[:suburb_id] 
+      @contacts = Contact.paginate(:page => params[:page], :per_page => 5).where(suburb_id: params[:suburb_id])
+    end
 
     respond_to do |format|
       format.js

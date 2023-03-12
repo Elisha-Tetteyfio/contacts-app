@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
 
+  get '/contacts/suburb/:suburb_id', to: 'contacts#index'
+
   root "contacts#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

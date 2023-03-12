@@ -2,6 +2,21 @@
   <p style="color: green"><%= notice %></p>
 
   <div class="contactTop flex-row-reverse">
+    <div class="dropdown mt-2">
+      <button class="btn contactNew dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter suburb
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <div>
+        <%= link_to "All", contacts_path, inner_html: {class: "text-decoration-none"} %>  
+      </div>
+        <% @suburbs.each do |suburb| %>
+          <div>
+            <%= link_to suburb.name, "/contacts/suburb/#{suburb.id}", inner_html: {class: "text-decoration-none"} %>  
+          </div>
+        <% end %>
+      </div>
+    </div>
     <div class="contactNew btn align-right mt-2">
       <%= link_to "+ Add contact", new_contact_path %>
     </div>
@@ -26,7 +41,11 @@
         <tbody>
           <% i = 1 %>
           <% @contacts.each do |contact| %>
-          <% no = 5*(params[:page].to_i - 1) + i %>
+          <% if params[:page].to_i <= 0 %>
+            <% no = i %>
+          <% else %>
+            <% no = 5*(params[:page].to_i - 1) + i %>
+          <% end %>
             <tr>
               <td> <%= no %> </td>
               <td> <%= contact.fname %> <%= contact.lname %>  </td>
