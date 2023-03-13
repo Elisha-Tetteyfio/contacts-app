@@ -1,10 +1,14 @@
-<h1>Editing city</h1>
+<div class="page">
+  <div class="d-flex justify-content-between">
+    <h3 class="m-4" style="color: rgb(72, 72, 116);">
+      <%= link_to raw("<i class='bi-arrow-left-circle backIcon'></i>"), cities_path %>
+        Editing city
+    </h3>
+  </div>
 
-<%= render "form", city: @city %>
+  <%= render "form", city: @city %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Show this city", @city %> |
-  <%= link_to "Back to cities", cities_path %>
 </div>
+

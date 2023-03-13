@@ -1,9 +1,17 @@
-<h1>New city</h1>
+<div class="page">
+  <fieldset>
+    <div class="">
+      <legend class="m-3" style="color: rgb(72, 72, 116);">
+        <%= link_to raw("<i class='bi-arrow-left-circle backIcon'></i>"), cities_path %>
+        New city
+      </legend>
+      <hr>
+    </div>
 
-<%= render "form", city: @city %>
+    <%= render "form", city: @city %>
+  </fieldset>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Back to cities", cities_path %>
 </div>
+

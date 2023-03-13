@@ -1,14 +1,69 @@
-<p style="color: green"><%= notice %></p>
+<div class="page">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Cities</h1>
+  <div class="contactTop flex-row-reverse">
+    <div class="contactNew btn align-right mt-2">
+      <%= link_to "+ Add city", new_city_path %>
+    </div>
+  </div>
 
-<div id="cities">
-  <% @cities.each do |city| %>
-    <%= render city %>
-    <p>
-      <%= link_to "Show this city", city %>
-    </p>
+  <div>
+    <% if @cities.empty? %>
+      <h3 class="font-italic font-monospace font-weight-lighter mt-4">There are no cities to display!</h3>
+    <% else %>
+    <fieldset id="contacts" data-controller="city">
+      <legend class="mb-4" style="color: rgb(72, 72, 116);">All cities</legend>
+      <hr>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="header">#</th>
+            <th class="header">Name</th>
+            <th class="header">Added by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% i = 1 %>
+          <% @cities.each do |city| %>
+            <tr>
+              <td> <%= i %> </td>
+              <td> <%= city.name %> </td>
+              <td> <%= city.user.fname %> <%= city.user.lname %> </td>
+              <td> 
+                <div class="actions">
+                    <%= link_to raw("<i class=\"bi-eye btn border\"></i>"), city%>
+                    <%= link_to raw("<i class=\"bi-pen btn border\"></i>"), edit_city_path(city)%>
+                    <button type="button" class="btn border" data-bs-target="#confirmationModal" data-bs-toggle="modal" action= "click->region#modall" >
+                      <i class="bi-trash"></i>
+                    </button>
+                  
+                    <div class="modal fade" id="confirmationModal" tabindex="-1" 
+                      aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog"> 
+                          <div class="modal-content">                      
+                            <div class="modal-header"> 
+                            <h3>Confirmation</h3>                       
+                            </div>                      
+                            <div class="modal-body"> 
+                            <div> Do you want to delete this city? </div>                       
+                            </div>                      
+                            <div class="modal-footer">  
+                                                  
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                        
+                              <%= button_to raw("<i class=\"bi bi-trash\"></i> Delete"), city_path(city), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this city?" } %>                      
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                  </div>  
+                </div>
+              </td>
+            </tr>
+            <% i += 1 %>
+          <% end %>
+        </tbody>
+      </table>
+    </fieldset>
   <% end %>
 </div>
 
-<%= link_to "New city", new_city_path %>
