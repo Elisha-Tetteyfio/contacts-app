@@ -1,14 +1,69 @@
-<p style="color: green"><%= notice %></p>
+<div class="page">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Suburbs</h1>
+  <div class="contactTop flex-row-reverse">
+    <div class="contactNew btn align-right mt-2">
+      <%= link_to "+ Add suburb", new_suburb_path %>
+    </div>
+  </div>
 
-<div id="suburbs">
-  <% @suburbs.each do |suburb| %>
-    <%= render suburb %>
-    <p>
-      <%= link_to "Show this suburb", suburb %>
-    </p>
+  <div>
+    <% if @suburbs.empty? %>
+      <h3 class="font-italic font-monospace font-weight-lighter mt-4">There are no suburbs to display!</h3>
+    <% else %>
+    <fieldset id="contacts" data-controller="suburb">
+      <legend class="mb-4" style="color: rgb(72, 72, 116);">All suburbs</legend>
+      <hr>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="header">#</th>
+            <th class="header">Name</th>
+            <th class="header">Added by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% i = 1 %>
+          <% @suburbs.each do |suburb| %>
+            <tr>
+              <td> <%= i %> </td>
+              <td> <%= suburb.name %> </td>
+              <td> <%= suburb.user.fname %> <%= suburb.user.lname %> </td>
+              <td> 
+                <div class="actions">
+                    <%= link_to raw("<i class=\"bi-eye btn border\"></i>"), suburb%>
+                    <%= link_to raw("<i class=\"bi-pen btn border\"></i>"), edit_suburb_path(suburb)%>
+                    <button type="button" class="btn border" data-bs-target="#confirmationModal" data-bs-toggle="modal" action= "click->region#modall" >
+                      <i class="bi-trash"></i>
+                    </button>
+                  
+                    <div class="modal fade" id="confirmationModal" tabindex="-1" 
+                      aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog"> 
+                          <div class="modal-content">                      
+                            <div class="modal-header"> 
+                            <h3>Confirmation</h3>                       
+                            </div>                      
+                            <div class="modal-body"> 
+                            <div> Do you want to delete this suburb? </div>                       
+                            </div>                      
+                            <div class="modal-footer">  
+                                                  
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>                        
+                              <%= button_to raw("<i class=\"bi bi-trash\"></i> Delete"), suburb_path(suburb), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this suburb?" } %>                      
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                  </div>  
+                </div>
+              </td>
+            </tr>
+            <% i += 1 %>
+          <% end %>
+        </tbody>
+      </table>
+    </fieldset>
   <% end %>
 </div>
 
-<%= link_to "New suburb", new_suburb_path %>

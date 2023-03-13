@@ -1,9 +1,17 @@
-<h1>New suburb</h1>
+<div class="page">
+  <fieldset>
+    <div class="">
+      <legend class="m-3" style="color: rgb(72, 72, 116);">
+        <%= link_to raw("<i class='bi-arrow-left-circle backIcon'></i>"), suburbs_path %>
+        New suburb
+      </legend>
+      <hr>
+    </div>
 
-<%= render "form", suburb: @suburb %>
+    <%= render "form", suburb: @suburb %>
+  </fieldset>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Back to suburbs", suburbs_path %>
 </div>
+

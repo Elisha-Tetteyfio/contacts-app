@@ -1,10 +1,14 @@
-<h1>Editing suburb</h1>
+<div class="page">
+  <div class="d-flex justify-content-between">
+    <h3 class="m-4" style="color: rgb(72, 72, 116);">
+      <%= link_to raw("<i class='bi-arrow-left-circle backIcon'></i>"), suburbs_path %>
+        Editing suburb
+    </h3>
+  </div>
 
-<%= render "form", suburb: @suburb %>
+  <%= render "form", suburb: @suburb %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Show this suburb", @suburb %> |
-  <%= link_to "Back to suburbs", suburbs_path %>
 </div>
+
