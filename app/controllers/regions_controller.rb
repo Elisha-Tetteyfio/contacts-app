@@ -8,6 +8,7 @@ class RegionsController < ApplicationController
 
   # GET /regions/1 or /regions/1.json
   def show
+    @cities = City.where(region: @region)
   end
 
   # GET /regions/new
