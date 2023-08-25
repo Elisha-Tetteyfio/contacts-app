@@ -7,7 +7,7 @@ defmodule Contactsapp.Schema.Region do
     field(:remark, :string)
     field(:created_at, :utc_datetime, default: DateTime.utc_now() |> DateTime.truncate(:second))
     field(:updated_at, :naive_datetime, default: NaiveDateTime.local_now())
-    belongs_to(:users, Contactsapp.Schema.User)
+    belongs_to(:user, Contactsapp.Schema.User)
   end
 
   def changeset(region, attrs) do
