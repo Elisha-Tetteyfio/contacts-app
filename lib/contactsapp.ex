@@ -31,4 +31,32 @@ defmodule Contactsapp do
         |> send_resp(200, Poison.encode!(%{resp_code: "00", regions: regions}))
     end
   end
-end
+
+  post "/contacts" do
+    {:ok, body, conn} = read_body(conn)
+    case Poison.decode(body) do
+      {:ok, parsed} ->
+        case Contact.create_contact(parsed) do
+          {:ok, result} ->
+            IO.inspect(result)
+
+            conn
+            |> put_status(201)
+            |> put_resp_header("content-type", "application/json")
+            |> send_resp(201, Poison.encode!(result))
+
+          {:error, reason} ->
+            conn
+            |> put_status(400)
+            |> put_resp_header("content-type", "application/json")
+            |> send_resp(400, Poison.encode!(reason))
+        end
+      {:error, reason} ->
+        IO.inspect(reason)
+        conn
+        |> put_status(400)
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(400, Poison.encode!(reason))
+      end
+    end
+  end

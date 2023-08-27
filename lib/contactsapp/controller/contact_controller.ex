@@ -14,4 +14,17 @@ defmodule Contactsapp.Controller.Contact do
         {:ok, contacts}
     end
   end
+
+  def create_contact(map_) do
+    contact = map_
+    changeset = Contact.changeset(%Contact{}, contact)
+
+    case Repo.insert(changeset) do
+      {:ok, result} ->
+        {:ok, result}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
 end
