@@ -27,4 +27,17 @@ defmodule Contactsapp.Controller.Contact do
         {:error, reason}
     end
   end
+
+  def contact_details(contact_id) do
+    case Repo.get_by(Contact, %{
+      id: String.to_integer(contact_id)
+    }) do
+      nil ->
+        {:notfound}
+
+      contact ->
+        {:ok, contact}
+    end
+  end
+
 end

@@ -23,6 +23,20 @@ defmodule Contactsapp do
     end
   end
 
+  get "/contacts/:id" do
+    contact_id = conn.params["id"]
+    case Contact.contact_details(contact_id) do
+      {:ok, contact} ->
+        conn
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(200, Poison.encode!(%{resp_code: "00", contact: contact}))
+      {:notfound} ->
+        conn
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(404, Poison.encode!(%{resp_code: "01", message: "Contact does not exist"}))
+    end
+  end
+
   get "/regions" do
     case Region.get_regions do
       {:ok, regions} ->
