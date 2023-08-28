@@ -30,7 +30,7 @@ defmodule Contactsapp.Controller.Contact do
 
   def contact_details(contact_id) do
     case Repo.get_by(Contact, %{
-      id: String.to_integer(contact_id), active_status: true, del_status: false
+      id: contact_id, active_status: true, del_status: false
     }) do
       nil ->
         {:notfound}
