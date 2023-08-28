@@ -72,4 +72,20 @@ defmodule Contactsapp.Controller.Contact do
     end
   end
 
+  def delete_contact(contact_id) do
+    case contact_details(contact_id) do
+      {:notfound} ->
+        {:notfound}
+      {:ok, contact} ->
+        changed_contact = Contact.changeset(contact, %{active_status: false, del_status: true})
+
+        case Repo.update(changed_contact) do
+          {:ok, _result} ->
+            {:ok, %{message: "Contact successfully deleted"}}
+          {:error, reason} ->
+            {:error, reason}
+        end
+    end
+  end
+
 end

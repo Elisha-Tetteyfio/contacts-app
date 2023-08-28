@@ -88,4 +88,19 @@ defmodule Contactsapp do
         |> send_resp(404, Poison.encode!(%{resp_code: "01", message: "Contact does not exist"}))
     end
   end
+
+  delete "/contact/:id" do
+    contact_id = conn.params["id"]
+
+    case Contact.delete_contact(contact_id) do
+      {:ok, _message} ->
+        conn
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(200, Poison.encode!(%{resp_code: "00", message: "Contact successfully deleted"}))
+      {:notfound} ->
+        conn
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(404, Poison.encode!(%{resp_code: "01", message: "Contact does not exist"}))
+    end
+  end
 end
