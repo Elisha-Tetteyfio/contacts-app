@@ -72,7 +72,7 @@ defmodule Contactsapp do
     end
   end
 
-  put "/contact/:id" do
+  put "/contacts/:id" do
     contact_id = conn.params["id"]
     {:ok, body, conn} = read_body(conn)
     {:ok, details} = Poison.decode(body)
@@ -89,7 +89,7 @@ defmodule Contactsapp do
     end
   end
 
-  delete "/contact/:id" do
+  delete "/contacts/:id" do
     contact_id = conn.params["id"]
 
     case Contact.delete_contact(contact_id) do
