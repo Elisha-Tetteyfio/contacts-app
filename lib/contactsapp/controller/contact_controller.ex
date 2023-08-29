@@ -1,15 +1,19 @@
 defmodule Contactsapp.Controller.Contact do
+  import Ecto.Query
+
   alias Contactsapp.Repo
   alias Contactsapp.Schema.Contact
 
   def get_contacts do
-    case Repo.all(Contact) do
-      # [] ->
-      #   {:error, %{error: "No contacts found"}}
-
+    case Repo.all(
+      from(c in Contact,
+        where: c.active_status == true and c.del_status == false,
+        order_by: [desc: c.created_at],
+        select: %{id: c.id, fname: c.fname, lname: c.lname, phone: c.phone, email: c.email, suburb_id: c.suburb_id}
+      )
+    ) do
       [] ->
         {:ok, %{msg: "No contacts found"}}
-
       contacts ->
         {:ok, contacts}
     end
