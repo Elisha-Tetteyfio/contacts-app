@@ -20,6 +20,6 @@ defmodule Contactsapp.Schema.Contact do
   def changeset(contact, attrs) do
     contact
     |> cast(attrs, [:fname, :lname, :phone, :birth_date, :email, :source, :user_id, :suburb_id, :active_status, :del_status])
-    |> validate_required([:fname, :lname, :user_id, :suburb_id])
+    |> validate_required([:fname, :user_id, :suburb_id])
   end
 end
