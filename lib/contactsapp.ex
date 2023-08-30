@@ -95,18 +95,25 @@ defmodule Contactsapp do
 
   put "/contacts/:id" do
     contact_id = conn.params["id"]
-    {:ok, body, conn} = read_body(conn)
-    {:ok, details} = Poison.decode(body)
+    case Validation.validate_id(contact_id) do
+      {:ok, _val} ->
+        {:ok, body, conn} = read_body(conn)
+        {:ok, details} = Poison.decode(body)
 
-    case Contact.update_contact(contact_id, details) do
-      {:ok, contact} ->
+        case Contact.update_contact(contact_id, details) do
+          {:ok, contact} ->
+            conn
+            |> put_resp_header("content-type", "application/json")
+            |> send_resp(200, Poison.encode!(%{resp_code: "00", contact: contact}))
+          {:notfound} ->
+            conn
+            |> put_resp_header("content-type", "application/json")
+            |> send_resp(404, Poison.encode!(%{resp_code: "01", message: "Contact does not exist"}))
+        end
+      {:error, reason} ->
         conn
         |> put_resp_header("content-type", "application/json")
-        |> send_resp(200, Poison.encode!(%{resp_code: "00", contact: contact}))
-      {:notfound} ->
-        conn
-        |> put_resp_header("content-type", "application/json")
-        |> send_resp(404, Poison.encode!(%{resp_code: "01", message: "Contact does not exist"}))
+        |> send_resp(404, Poison.encode!(reason))
     end
   end
 
