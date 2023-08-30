@@ -4,6 +4,7 @@ defmodule Contactsapp.Controller.Contact do
   alias Contactsapp.Validation
   alias Contactsapp.Repo
   alias Contactsapp.Schema.Contact
+  alias Contactsapp.Constants
 
   def get_contacts do
     case Repo.all(
@@ -14,7 +15,7 @@ defmodule Contactsapp.Controller.Contact do
       )
     ) do
       [] ->
-        {:error, "No contacts found"}
+        {:error, Constants.no_contacts_found}
       contacts ->
         {:ok, contacts}
     end
@@ -42,7 +43,7 @@ defmodule Contactsapp.Controller.Contact do
       )
     ) do
       nil ->
-        {:error}
+        {:error, Constants.contact_not_found}
 
       contact ->
         {:ok, contact}
@@ -51,8 +52,8 @@ defmodule Contactsapp.Controller.Contact do
 
   def update_contact(contact_id, details) do
     case contact_details(contact_id) do
-      {:error} ->
-        {:notfound}
+      {:error, reason} ->
+        {:error, reason}
       {:ok, contact} ->
         fname = details["fname"] || contact.fname
         lname = details["lname"] || contact.lname
@@ -101,8 +102,8 @@ defmodule Contactsapp.Controller.Contact do
   @spec delete_contact(any) :: {:notfound} | {:error, any} | {:ok, %{message: <<_::224>>}}
   def delete_contact(contact_id) do
     case contact_details(contact_id) do
-      {:error} ->
-        {:notfound}
+      {:error, reason} ->
+        {:error, reason}
       {:ok, contact} ->
         changed_contact = Contact.changeset(contact, %{active_status: false, del_status: true})
 
@@ -114,5 +115,4 @@ defmodule Contactsapp.Controller.Contact do
         end
     end
   end
-
 end

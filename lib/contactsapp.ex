@@ -3,7 +3,6 @@ defmodule Contactsapp do
   alias Contactsapp.Controller.Contact
   alias Contactsapp.Controller.Region
   alias Contactsapp.Validation
-  alias Contactsapp.Constants
 
   plug :match
   plug :dispatch
@@ -12,6 +11,12 @@ defmodule Contactsapp do
   Documentation for `Contactsapp`.
   """
 
+  def send_response(conn, request_status, response) do
+    conn
+    |> put_resp_header("content-type", "application/json")
+    |> send_resp(request_status, Poison.encode!(response))
+  end
+
   get "/" do
     send_resp(conn, 200, "Hello world!!!")
   end
@@ -19,13 +24,9 @@ defmodule Contactsapp do
   get "/contacts" do
     case Contact.get_contacts do
       {:ok, contacts} ->
-        conn
-        |> put_resp_header("content-type", "application/json")
-        |> send_resp(200, Poison.encode!(%{resp_code: "00", contacts: contacts}))
-      {:error, _message} ->
-        conn
-        |> put_resp_header("content-type", "application/json")
-        |> send_resp(404, Poison.encode!(Constants.no_contacts_found))
+        send_response(conn, 200, %{resp_code: "00", contacts: contacts})
+      {:error, reason} ->
+        send_response(conn, 404, reason)
     end
   end
 
@@ -35,27 +36,19 @@ defmodule Contactsapp do
       {:ok, _val} ->
         case Contact.contact_details(contact_id) do
           {:ok, contact} ->
-            conn
-            |> put_resp_header("content-type", "application/json")
-            |> send_resp(200, Poison.encode!(%{resp_code: "00", contact: contact}))
-          {:error} ->
-            conn
-            |> put_resp_header("content-type", "application/json")
-            |> send_resp(404, Poison.encode!(Constants.contact_not_found))
+            send_response(conn, 200, %{resp_code: "00", contact: contact})
+          {:error, reason} ->
+            send_response(conn, 404, reason)
         end
       {:error, reason} ->
-        conn
-        |> put_resp_header("content-type", "application/json")
-        |> send_resp(400, Poison.encode!(reason))
+        send_response(conn, 400, reason)
     end
   end
 
   get "/regions" do
     case Region.get_regions do
       {:ok, regions} ->
-        conn
-        |> put_resp_header("content-type", "application/json")
-        |> send_resp(200, Poison.encode!(%{resp_code: "00", regions: regions}))
+        send_response(conn, 200, %{resp_code: "00", regions: regions})
     end
   end
 
@@ -80,20 +73,13 @@ defmodule Contactsapp do
 
       case Contact.create_contact(contact) do
         {:ok, result} ->
-          conn
-          |> put_resp_header("content-type", "application/json")
-          |> send_resp(201, Poison.encode!(result))
+          send_response(conn, 201, result)
         {:error, reason} ->
-          conn
-          |> put_resp_header("content-type", "application/json")
-          |> send_resp(400, Poison.encode!(reason))
+          send_response(conn, 400, reason)
       end
     else
       {:error, reason} ->
-        conn
-        |> put_status(400)
-        |> put_resp_header("content-type", "application/json")
-        |> send_resp(400, Poison.encode!(reason))
+        send_response(conn, 400, reason)
     end
   end
 
@@ -106,18 +92,12 @@ defmodule Contactsapp do
 
         case Contact.update_contact(contact_id, details) do
           {:ok, contact} ->
-            conn
-            |> put_resp_header("content-type", "application/json")
-            |> send_resp(200, Poison.encode!(%{resp_code: "00", contact: contact}))
-          {:notfound} ->
-            conn
-            |> put_resp_header("content-type", "application/json")
-            |> send_resp(404, Poison.encode!(Constants.contact_not_found))
+            send_response(conn, 200, %{resp_code: "00", contact: contact})
+          {:error, reason} ->
+            send_response(conn, 404, reason)
         end
       {:error, reason} ->
-        conn
-        |> put_resp_header("content-type", "application/json")
-        |> send_resp(404, Poison.encode!(reason))
+        send_response(conn, 400, reason)
     end
   end
 
@@ -127,18 +107,12 @@ defmodule Contactsapp do
       {:ok, _val} ->
         case Contact.delete_contact(contact_id) do
           {:ok, _message} ->
-            conn
-            |> put_resp_header("content-type", "application/json")
-            |> send_resp(200, Poison.encode!(%{resp_code: "00", message: "Contact successfully deleted"}))
-          {:notfound} ->
-            conn
-            |> put_resp_header("content-type", "application/json")
-            |> send_resp(404, Poison.encode!(Constants.contact_not_found))
+            send_response(conn, 200, %{resp_code: "00", message: "Contact successfully deleted"})
+          {:error, reason} ->
+            send_response(conn, 404, reason)
         end
       {:error, reason} ->
-        conn
-        |> put_resp_header("content-type", "application/json")
-        |> send_resp(404, Poison.encode!(reason))
+        send_response(conn, 400, reason)
     end
   end
 end
