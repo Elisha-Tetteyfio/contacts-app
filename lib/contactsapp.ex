@@ -3,6 +3,7 @@ defmodule Contactsapp do
   alias Contactsapp.Controller.Contact
   alias Contactsapp.Controller.Region
   alias Contactsapp.Validation
+  alias Contactsapp.Constants
 
   plug :match
   plug :dispatch
@@ -21,12 +22,15 @@ defmodule Contactsapp do
         conn
         |> put_resp_header("content-type", "application/json")
         |> send_resp(200, Poison.encode!(%{resp_code: "00", contacts: contacts}))
+      {:error, _message} ->
+        conn
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(404, Poison.encode!(Constants.no_contacts_found))
     end
   end
 
   get "/contacts/:id" do
     contact_id = conn.params["id"]
-    IO.inspect(contact_id)
     case Validation.validate_id(contact_id) do
       {:ok, _val} ->
         case Contact.contact_details(contact_id) do
@@ -34,10 +38,10 @@ defmodule Contactsapp do
             conn
             |> put_resp_header("content-type", "application/json")
             |> send_resp(200, Poison.encode!(%{resp_code: "00", contact: contact}))
-          {:notfound} ->
+          {:error} ->
             conn
             |> put_resp_header("content-type", "application/json")
-            |> send_resp(404, Poison.encode!(%{resp_code: "01", message: "Contact does not exist"}))
+            |> send_resp(404, Poison.encode!(Constants.contact_not_found))
         end
       {:error, reason} ->
         conn
@@ -108,7 +112,7 @@ defmodule Contactsapp do
           {:notfound} ->
             conn
             |> put_resp_header("content-type", "application/json")
-            |> send_resp(404, Poison.encode!(%{resp_code: "01", message: "Contact does not exist"}))
+            |> send_resp(404, Poison.encode!(Constants.contact_not_found))
         end
       {:error, reason} ->
         conn
@@ -129,7 +133,7 @@ defmodule Contactsapp do
           {:notfound} ->
             conn
             |> put_resp_header("content-type", "application/json")
-            |> send_resp(404, Poison.encode!(%{resp_code: "01", message: "Contact does not exist"}))
+            |> send_resp(404, Poison.encode!(Constants.contact_not_found))
         end
       {:error, reason} ->
         conn

@@ -12,6 +12,7 @@ end
 defmodule Contactsapp.Constants do
   import Contactsapp.Macro
 
+  # Validation error messages
   const :err_missing_id, %{ resp_code: "050", resp_msg: "Missing id in request" }
   const :err_invalid_id, %{ resp_code: "051", resp_msg: "Invalid id" }
   const :err_missing_first_name, %{ resp_code: "052", resp_msg: "Missing first name" }
@@ -20,4 +21,12 @@ defmodule Contactsapp.Constants do
   const :err_missing_phone_number, %{ resp_code: "055", resp_msg: "Missing phone number" }
   const :err_invalid_phone_number, %{ resp_code: "056", resp_msg: "Invalid phone number" }
   const :err_invalid_email, %{ resp_code: "057", resp_msg: "Invalid e-mail" }
+
+  # Other response messages
+  const :no_contacts_found, %{ resp_code: "01", resp_msg: "No contacts found" }
+  const :contact_not_found, %{ resp_code: "02", resp_msg: "Contact does not exist" }
+  # const :err_missing_id, %{ resp_code: "050", resp_msg: "Missing id in request" }
+  # const :err_missing_id, %{ resp_code: "050", resp_msg: "Missing id in request" }
+  # const :err_missing_id, %{ resp_code: "050", resp_msg: "Missing id in request" }
+
 end
