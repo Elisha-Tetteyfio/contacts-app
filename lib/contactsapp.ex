@@ -72,8 +72,8 @@ defmodule Contactsapp do
       }
 
       case Contact.create_contact(contact) do
-        {:ok, result} ->
-          send_response(conn, 201, result)
+        {:ok, message} ->
+          send_response(conn, 201, message)
         {:error, reason} ->
           send_response(conn, 400, reason)
       end
@@ -86,13 +86,13 @@ defmodule Contactsapp do
   put "/contacts/:id" do
     contact_id = conn.params["id"]
     case Validation.validate_id(contact_id) do
-      {:ok, _val} ->
+      {:ok, _} ->
         {:ok, body, conn} = read_body(conn)
         {:ok, details} = Poison.decode(body)
 
         case Contact.update_contact(contact_id, details) do
-          {:ok, contact} ->
-            send_response(conn, 200, %{resp_code: "00", contact: contact})
+          {:ok, message} ->
+            send_response(conn, 200, message)
           {:error, reason} ->
             send_response(conn, 404, reason)
         end
@@ -104,10 +104,10 @@ defmodule Contactsapp do
   delete "/contacts/:id" do
     contact_id = conn.params["id"]
     case Validation.validate_id(contact_id) do
-      {:ok, _val} ->
+      {:ok, _} ->
         case Contact.delete_contact(contact_id) do
-          {:ok, _message} ->
-            send_response(conn, 200, %{resp_code: "00", message: "Contact successfully deleted"})
+          {:ok, message} ->
+            send_response(conn, 200, message)
           {:error, reason} ->
             send_response(conn, 404, reason)
         end

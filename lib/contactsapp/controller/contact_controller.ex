@@ -26,8 +26,8 @@ defmodule Contactsapp.Controller.Contact do
     changeset = Contact.changeset(%Contact{}, contact)
 
     case Repo.insert(changeset) do
-      {:ok, result} ->
-        {:ok, result}
+      {:ok, _result} ->
+        {:ok, Constants.success_created}
 
       {:error, reason} ->
         {:error, reason}
@@ -37,7 +37,7 @@ defmodule Contactsapp.Controller.Contact do
   def contact_details(contact_id) do
     case Repo.one(
       from(c in Contact,
-        where: c.id == ^contact_id and c.active_status == true and c.del_status == false,
+        where: c.id == ^contact_id and (c.active_status and not c.del_status),
         order_by: [desc: c.created_at]
         # select: %{id: c.id, fname: c.fname, lname: c.lname, phone: c.phone, email: c.email, birth_date: c.birth_date, suburb_id: c.suburb_id, source: c.source, user_id: c.user_id, active_status: c.active_status, del_status: c.del_status}
       )
@@ -84,8 +84,8 @@ defmodule Contactsapp.Controller.Contact do
           case Repo.update(changed_contact) do
             {:ok, _result} ->
               case create_contact(new_contact) do
-                {:ok, contact} ->
-                  {:ok, contact}
+                {:ok, _} ->
+                  {:ok, Constants.success_updated}
                 {:error, reason} ->
                   {:error, reason}
               end
@@ -99,7 +99,6 @@ defmodule Contactsapp.Controller.Contact do
     end
   end
 
-  @spec delete_contact(any) :: {:notfound} | {:error, any} | {:ok, %{message: <<_::224>>}}
   def delete_contact(contact_id) do
     case contact_details(contact_id) do
       {:error, reason} ->

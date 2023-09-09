@@ -23,10 +23,10 @@ defmodule Contactsapp.Constants do
   const :err_invalid_email, %{ resp_code: "057", resp_msg: "Invalid e-mail" }
 
   # Other response messages
-  const :no_contacts_found, %{ resp_code: "01", resp_msg: "No contacts found" }
-  const :contact_not_found, %{ resp_code: "02", resp_msg: "Contact does not exist" }
-  # const :err_missing_id, %{ resp_code: "050", resp_msg: "Missing id in request" }
-  # const :err_missing_id, %{ resp_code: "050", resp_msg: "Missing id in request" }
-  # const :err_missing_id, %{ resp_code: "050", resp_msg: "Missing id in request" }
+  const :success_created, %{ resp_code: "00", resp_msg: "Contact successfully created" }
+  const :success_updated, %{ resp_code: "00", resp_msg: "Contact successfully updated" }
+  const :success_deleted, %{ resp_code: "00", resp_msg: "Contact successfully deleted" }
+  const :no_contacts_found, %{ resp_code: "020", resp_msg: "No contacts found" }
+  const :contact_not_found, %{ resp_code: "021", resp_msg: "Contact does not exist" }
 
 end
